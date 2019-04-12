@@ -62,7 +62,8 @@ export default class LevelTwo extends Scene {
     })
 
     //Ball
-    this.ball = new Ball(game.drawWidth, 100, 300, 20, 20);
+    this.ball = new Ball(game.drawWidth, game.drawHeight, 100, 300, 20, 20);
+    this.ball.speedModifier = 20;
 
     game.add(this.ball);
 

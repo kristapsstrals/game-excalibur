@@ -9,7 +9,11 @@ class Brick extends Actor {
     super(x, y, width, height, color);
 
     this.collisionType = CollisionType.Active
-    this.color = Color.Chartreuse;
+
+    if (color)
+      this.color = color;
+    else
+      this.color = Color.Chartreuse;    
   }
 
   public kill() {

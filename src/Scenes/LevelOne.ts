@@ -62,7 +62,7 @@ export default class LevelOne extends Scene {
     })
 
     //Ball
-    this.ball = new Ball(game.drawWidth, 100, 300, 20, 20);
+    this.ball = new Ball(game.drawWidth, game.drawHeight, 100, 300, 20, 20);
 
     game.add(this.ball);
 

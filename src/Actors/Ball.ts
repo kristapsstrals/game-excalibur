@@ -7,7 +7,9 @@ class Ball extends Actor {
 
   private killed = false;
 
-  constructor(private gameDrawWidth: number, x?: number, y?: number, width?: number, height?: number, color?: ex.Color) {
+  public speedModifier: number = 10;
+
+  constructor(private gameDrawWidth: number, private gameDrawHeight: number, x?: number, y?: number, width?: number, height?: number, color?: ex.Color) {
     super(x, y, width, height, color);
 
     this.color = Color.Red;
@@ -59,6 +61,8 @@ class Ball extends Actor {
   }
 
   postUpdate(event?: PostUpdateEvent) {
+    // If the ball collides with the left side
+    // of the screen reverse the x velocity
     if (this.pos.x < this.getWidth() / 2) {
       this.vel.x *= -1
     }
@@ -75,9 +79,15 @@ class Ball extends Actor {
       this.vel.y *= -1
     }
 
+    // If the ball collides with the bottom side
+    // of the screen
+    if (this.pos.y + this.getHeight() / 2 > this.gameDrawHeight) {
+      this.vel.y *= -1
+    }
+
     if (this.killed) {
-      let x = this.vel.x * (1 + (10/Math.abs(this.vel.x))); //increase speed by 10%
-      let y = this.vel.y * (1 + (10/Math.abs(this.vel.y))); //increase speed by 10%
+      let x = this.vel.x * (1 + (this.speedModifier/Math.abs(this.vel.x))); //increase speed by 10%
+      let y = this.vel.y * (1 + (this.speedModifier/Math.abs(this.vel.y))); //increase speed by 10%
 
       this.vel.setTo(x, y);
       this.killed = false;
